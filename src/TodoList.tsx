@@ -10,6 +10,14 @@ type TodoListPropsType = {
 }
 
 function TodoList(props: TodoListPropsType) {
+    let tasksElements =    props.tasks.map((t) => <li key={t.id}><input type="checkbox" checked={t.isDone}/>
+        <span>{t.title}</span>
+        <button onClick={() => {
+            props.removeTask(t.id)
+        }}>x
+        </button>
+    </li>)
+
     return (
         <div>
             <div>
@@ -19,15 +27,7 @@ function TodoList(props: TodoListPropsType) {
                     <button>+</button>
                 </div>
                 <ul>
-                    {
-                        props.tasks.map((t) => <li><input type="checkbox" checked={t.isDone}/>
-                            <span>{t.title}</span>
-                            <button onClick={() => {
-                                props.removeTask(t.id)
-                            }}>x
-                            </button>
-                        </li>)
-                    }
+                    {tasksElements }
                 </ul>
                 <div>
                     <button onClick={() => {
